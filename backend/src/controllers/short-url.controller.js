@@ -1,5 +1,5 @@
 import { getShortUrl } from "../dao/short-url.dao.js";
-import { createShortUrlServiceWithoutUser } from "../services/short-url.services.js";
+import { createShortUrlServiceWithoutUser } from "../services/short-url.service.js";
 
 export const createShortUrl = async (req, res) => {
   try {
