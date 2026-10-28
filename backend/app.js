@@ -12,6 +12,9 @@ app.use(cors());
 
 app.use("/api", shortUrlRouter);
 
+app.use(notFoundHandler);  // after all routes
+app.use(errorHandler);     // must be the LAST middleware
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   connectDB();

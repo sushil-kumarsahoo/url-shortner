@@ -1,4 +1,5 @@
-import ShortUrl from "../models/short-url.model.js";
+import shortUrlSchema from "../models/short-url.model.js";
+
 
 export const saveShortUrl = async (shortUrl, longUrl, userId) => {
   const data = { full_url: longUrl, short_url: shortUrl };
@@ -7,5 +8,9 @@ export const saveShortUrl = async (shortUrl, longUrl, userId) => {
     data.user_id = userId;
   }
 
-  return await ShortUrl.create(data);
+  return await shortUrlSchema.create(data);
 };
+
+export const getShortUrl = async (shortUrl) => {
+     return await shortUrlSchema.findOneAndUpdate({short_url: shortUrl}, {$inc:{clicks:1}})
+}
