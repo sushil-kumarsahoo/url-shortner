@@ -1,4 +1,5 @@
 import shortUrlSchema from "../models/short-url.model.js";
+import { ConflictError } from "../utils/errorHandler.js";
 
 export const saveShortUrl = async (shortUrl, longUrl, userId) => {
   try {
@@ -10,7 +11,10 @@ export const saveShortUrl = async (shortUrl, longUrl, userId) => {
 
     return await shortUrlSchema.create(data);
   } catch (error) {
-    next(error);
+    if (error.code == 11000) {
+      throw new ConflictError("Short URL already exists");
+    }
+    throw new Error(error);
   }
 };
 
