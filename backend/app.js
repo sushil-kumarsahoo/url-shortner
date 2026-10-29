@@ -7,6 +7,7 @@ import connectDB from "./src/config/mongo.config.js";
 import shortUrlRouter from "./src/routes/short-url.route.js"
 import { errorHandler } from "./src/utils/errorHandler.js";
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
