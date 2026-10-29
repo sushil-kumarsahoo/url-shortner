@@ -7,6 +7,8 @@ import connectDB from "./src/config/mongo.config.js";
 import shortUrlRouter from "./src/routes/short-url.route.js"
 import { errorHandler } from "./src/utils/errorHandler.js";
 import { redirectFromshortUrl } from "./src/controllers/short-url.controller.js";
+import authRouter from "./src/routes/auth.route.js";
+
 
 app.use(cors({
   origin: 'http://localhost:5173', // Explicitly allow your frontend origin
@@ -16,6 +18,7 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/api/auth", authRouter);
 app.use("/api", shortUrlRouter);
 app.get("/:id",redirectFromshortUrl);
 
