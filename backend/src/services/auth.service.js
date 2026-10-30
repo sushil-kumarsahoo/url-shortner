@@ -1,7 +1,7 @@
-import { createUser, findUserByEmail } from "../dao/user.dao.js";
-import { ConflictError, UnauthorizedError } from "../utils/errorHandler.js";
+import { createUser, findUserByEmailWithPassword } from "../dao/user.dao.js";
+import { ConflictError } from "../utils/errorHandler.js";
 import { signToken } from "../utils/helper.js";
-import bcrypt, { compare } from "bcrypt";
+import bcrypt from "bcrypt";
 
 export const registerUser = async (name, email, password) => {
   const existingUser = await findUserByEmail(email);
@@ -14,7 +14,7 @@ export const registerUser = async (name, email, password) => {
 };
 
 export const loginUser = async (email, password) => {
-  const user = await findUserByEmail(email);
+  const user = await findUserByEmailWithPassword(email);
   if (!user) throw new Error("Invalid credentials");
 
   const isMatch = await bcrypt.compare(password, user.password);
