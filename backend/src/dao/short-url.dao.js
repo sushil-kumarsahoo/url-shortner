@@ -6,7 +6,7 @@ export const saveShortUrl = async (shortUrl, longUrl, userId) => {
     const data = { full_url: longUrl, short_url: shortUrl };
 
     if (userId) {
-      data.user_id = userId;
+      data.user = userId;
     }
 
     return await shortUrlModel.create(data);
@@ -28,3 +28,7 @@ export const getShortUrl = async (shortUrl) => {
     next(error);
   }
 };
+
+export const getCustomShortUrl = async (slug) => {
+   return await shortUrlModel.findOne({short_url: slug});
+}

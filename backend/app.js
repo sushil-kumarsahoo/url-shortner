@@ -8,6 +8,7 @@ import shortUrlRouter from "./src/routes/short-url.route.js"
 import { errorHandler } from "./src/utils/errorHandler.js";
 import { redirectFromshortUrl } from "./src/controllers/short-url.controller.js";
 import authRouter from "./src/routes/auth.route.js";
+import cookieParser from "cookie-parser";
 
 
 app.use(cors({
@@ -17,6 +18,7 @@ app.use(cors({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use("/api/auth", authRouter);
 app.use("/api", shortUrlRouter);
