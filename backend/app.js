@@ -8,6 +8,7 @@ import shortUrlRouter from "./src/routes/short-url.route.js"
 import { errorHandler } from "./src/utils/errorHandler.js";
 import { redirectFromshortUrl } from "./src/controllers/short-url.controller.js";
 import authRouter from "./src/routes/auth.route.js";
+import user_routes from "./src/routes/user.route.js";
 import cookieParser from "cookie-parser";
 
 
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+app.use("/api/user",user_routes)
 app.use("/api/auth", authRouter);
 app.use("/api", shortUrlRouter);
 app.get("/:id",redirectFromshortUrl);

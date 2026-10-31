@@ -4,11 +4,11 @@ import { verifyToken } from "../utils/helper.js";
 
 export const authMiddleware = async (req, res, next) => {
   const token = req.cookies?.accessToken;
-  if (!token) return new UnauthorizedError("Unauthorized");
+  if (!token) return next(new UnauthorizedError("Unauthorized"));
   try {
     const decoded = verifyToken(token);
     const user = await findUserById(decoded.id);
-    if (!user) return new UnauthorizedError("Unauthorized");
+    if (!user) return next(new UnauthorizedError("Unauthorized"));
     req.user = user;
     next();
   } catch (error) {
