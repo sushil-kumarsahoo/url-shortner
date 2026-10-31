@@ -11,6 +11,16 @@ export const registerUser = async(name, email, password) => {
 }
 
 export const logoutUser = async() => {
-    const {data} = await axiosInstance.get("/api/auth/logout")
+    const {data} = await axiosInstance.post("/api/auth/logout")
+    return data
+}
+
+export const getCurrentUser = async () =>{
+    const {data} = await axiosInstance.get("/api/auth/me")
+    return data
+}
+
+export const getAllUserUrls = async () =>{
+    const {data} = await axiosInstance.post("/api/user/urls")
     return data
 }
