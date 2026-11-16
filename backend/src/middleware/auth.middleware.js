@@ -8,7 +8,7 @@ export const authMiddleware = async (req, res, next) => {
   try {
     const decoded = verifyToken(token);
     const user = await findUserById(decoded.id);
-    if (!user) return next(new UnauthorizedError("Unauthorized"));
+    if (!user) return next(new UnauthorizedError("Invalid or expired token"));
     req.user = user;
     next();
   } catch (error) {

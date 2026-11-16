@@ -14,21 +14,21 @@ export const saveShortUrl = async (shortUrl, longUrl, userId) => {
     if (error.code == 11000) {
       throw new ConflictError("Short URL already exists");
     }
-    throw new Error(error);
+    throw error;
   }
 };
 
 export const getShortUrl = async (shortUrl) => {
-  try {
-    return await shortUrlModel.findOneAndUpdate(
-      { short_url: shortUrl },
-      { $inc: { clicks: 1 } },
-    );
-  } catch (error) {
-    next(error);
-  }
+  return await shortUrlModel.findOneAndUpdate(
+    { short_url: shortUrl },
+    { $inc: { clicks: 1 } },
+  );
 };
 
 export const getCustomShortUrl = async (slug) => {
-   return await shortUrlModel.findOne({short_url: slug});
-}
+  return await shortUrlModel.findOne({ short_url: slug });
+};
+
+export const deleteShortUrlDao = async (id, userId) => {
+  return await shortUrlModel.findOneAndDelete({ _id: id, user: userId });
+};
