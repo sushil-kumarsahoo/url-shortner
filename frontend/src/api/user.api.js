@@ -17,10 +17,15 @@ export const logoutUser = async() => {
 
 export const getCurrentUser = async () =>{
     const {data} = await axiosInstance.get("/api/auth/me")
-    return data
+    return data.user;
 }
 
 export const getAllUserUrls = async () =>{
     const {data} = await axiosInstance.post("/api/user/urls")
     return data
+}
+
+export const googleAuthApi = async (credential) => {
+    const { data } = await axiosInstance.post("/api/auth/google", { credential });
+    return data;
 }
